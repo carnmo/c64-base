@@ -9,5 +9,5 @@ Toolkit for cross compiling MOS Technology 6502 assembly code for the Commodore 
 `make`
 
 ## Notes
-* `bin/acme` version 0.97 and `bin/exomizer` version 3.1.2  was built from source using `gcc` version 14.2.1 on `Arch Linux`
-* `c1541` and `x64sc` version 3.8 is part of the [vice Arch Linux package](https://archlinux.org/packages/extra/x86_64/vice/).
+* `bin\acme.exe` version 0.97 and `bin\exomizer.exe` version 3.1.2 was built from source using `gcc` version 14.2.0 on `MinGW-w64`
+* `c1541.exe` and `x64sc.exe` version 3.9 is part of [Vice](https://vice-emu.sourceforge.io/).
