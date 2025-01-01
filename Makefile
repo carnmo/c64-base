@@ -1,10 +1,10 @@
 .ONESHELL:
 .RECIPEPREFIX = >
 
-COMPILER=bin/acme --format cbm -v3
-CRUNCHER=bin/exomizer sfx 0x801 -x3 -C
-DISKTOOL=c1541
-EMULATOR=x64sc -silent
+COMPILER=bin\acme.exe --format cbm -v3
+CRUNCHER=bin\exomizer.exe sfx 0x801 -x3 -C
+DISKTOOL=C:\apps\vice\bin\c1541.exe
+EMULATOR=C:\apps\vice\bin\x64sc.exe -silent
 SOURCES=$(wildcard src/*.asm)
 TARGET=c64-base
 TARGET_PRG=$(TARGET).prg
