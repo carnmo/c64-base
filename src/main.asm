@@ -93,11 +93,9 @@ k:
 	rts
 
 pulse:
-	ldx $64
-	lda pulsecolors,x
+	lda pulsecolors,y
 	sta $d020
 	sta $d021
-	inc $64
 	rts
 
 write:
@@ -107,15 +105,16 @@ write:
 	bpl resettext
 
 	lda ($70),y
-	sta $0400+40*12,y
+	sta $0400+40*12+4,y
 	lda #$01
-	sta $d800+40*12,y
+	sta $d800+40*12+4,y
 	rts
 
 pulsecolors:
+	!fill 32,0
 	!byte $01,$01,$0f,$0f,$0c,$0c,$0b,$0b,$00,$00
 
-	!align 255,0	
+	!align 255,0,0
 	!scr "first line of text first line of"
 	!scr "                                "
 	!scr "second line of text first line o"
