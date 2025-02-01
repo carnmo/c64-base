@@ -32,13 +32,38 @@
 	lda #$00
 	sta $d012
 
-	lda #<irq 
-	sta $fffe
-	lda #>irq
-	sta $ffff
+	ldx #<irq 
+	stx $fffe
+	ldx #>irq
+	stx $ffff
 	
 	cli
-	
+
+
+; init sound
+	sta $d404   ; voice 1 control
+	sta $d40b   ; voice 2 control
+
+	lda #15
+	sta $d418
+
+	lda #5
+	sta $d401
+
+	lda #(7<<4)|9
+	sta $d406
+	lda #(3<<4)|3
+	sta $d40d
+
+	lda #15
+	sta $d405
+	sta $d40c
+
+	lda #17
+	sta $d404
+	lda #17
+	sta $d40b
+
 	jmp *
 
 irq:
@@ -49,14 +74,17 @@ irq:
 	cpy #32
 	bpl resettext
 
+; write:
 	lda ($70),y
 	sta $0400+40*12+4,y
+
 	lda #$01
 	sta $d800+40*12+4,y
 	sta $d012
 
 	rti
 
+; assumes y is $65
 resettext:
 	lda $70
 	cpy #64
@@ -73,7 +101,6 @@ resettext:
 	dec $65
 
 
-; assumes y is $65
 pulse:
 	lsr
 	lsr
@@ -83,24 +110,26 @@ pulse:
 	and #1
 	bne noflash
 
+	cpy #42
+	bpl noflash
 	lda pulsecolors,y
 	sta $d020
 	sta $d021
+	lsr
+	sta $d016
 
 noflash:
-	
-	lda #15
-	sta $d418
-
-	lda #17
+    clc
+    adc #5
+    and #15
 	sta $d401
 
-	lda #240
-	sta $d406
+	lda $d012
+	and #15
+	clc
+	adc #19
+	sta $d408
 
-	lda #17
-	sta $d404
-	
 	rti
 
 
