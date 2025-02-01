@@ -1,7 +1,3 @@
-	;$64 pulse step 0-9
-	;$65 charcount
-	;$70 pointer to #text
-
 	*= $0801
 
 	lda #0
@@ -9,6 +5,7 @@
 	sta $65
 	dec $65
 	sta $70
+	sta $d021
 	lda #$09
 	sta $71
 
@@ -47,20 +44,51 @@
 irq:
 	asl $d019
 
-	jsr write
-	jsr pulse
+	inc $65
+	ldy $65
+	cpy #32
+	bpl resettext
 
-	lda #$00
+	lda ($70),y
+	sta $0400+40*12+4,y
+	lda #$01
+	sta $d800+40*12+4,y
 	sta $d012
-
-	lda #<irq
-	sta $fffe
-	lda #>irq
-	sta $ffff
 
 	rti
 
-sound:
+resettext:
+	lda $70
+	cpy #64
+	bmi pulse
+
+	clc
+
+	adc #32
+	sta $70
+
+	lda #0
+	sta $64
+	sta $65
+	dec $65
+
+
+; assumes y is $65
+pulse:
+	lsr
+	lsr
+	lsr
+	lsr
+	lsr
+	and #1
+	bne noflash
+
+	lda pulsecolors,y
+	sta $d020
+	sta $d021
+
+noflash:
+	
 	lda #15
 	sta $d418
 
@@ -72,43 +100,9 @@ sound:
 
 	lda #17
 	sta $d404
+	
+	rti
 
-	rts
-
-resettext:
-	cpy #100
-	bmi k
-
-	lda #0
-	sta $64
-	sta $65
-	dec $65
-
-	clc
-
-	lda $70
-	adc #32
-	sta $70
-k:
-	rts
-
-pulse:
-	lda pulsecolors,y
-	sta $d020
-	sta $d021
-	rts
-
-write:
-	inc $65
-	ldy $65
-	cpy #32
-	bpl resettext
-
-	lda ($70),y
-	sta $0400+40*12+4,y
-	lda #$01
-	sta $d800+40*12+4,y
-	rts
 
 pulsecolors:
 	!fill 32,0
