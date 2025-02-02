@@ -1,7 +1,6 @@
 .ONESHELL:
 UNAME_S := $(shell uname -s)
 
-# IF Darwin
 ifeq ($(UNAME_S),Darwin)
 COMPILER=acme --format cbm -v3
 CRUNCHER=./bin/exomizer sfx 0x801 -x3 -C
@@ -28,7 +27,7 @@ disk:
 	$(DISKTOOL) -format $(TARGET),42 d64 $(TARGET_DISK) -attach $(TARGET_DISK) -write $(TARGET_PRG) $(TARGET)
 
 run:
-	$(EMULATOR) ${TARGET_DISK}
+	$(EMULATOR) ${TARGET_PRG}
 
 clean:
 	$(RM) $(TARGET_PRG)
