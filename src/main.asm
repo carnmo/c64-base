@@ -51,7 +51,6 @@ irq:
 	cpy #32
 	bpl resettext
 
-; write:
 	lda ($70),y
 	sta $0400+40*12+4,y
 
