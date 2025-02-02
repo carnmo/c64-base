@@ -1,6 +1,6 @@
 # c64-base
 
-A 512 bytes Commodore 64 excursion. 
+A 512 bytes Commodore 64 excursion at [Gerp 2025](https://gerp.traktor.group).
 
 ## Authors
 
