@@ -4,7 +4,6 @@
 	sta $64
 	sta $65
 	dec $65
-	;sta $70
 	sta $d021
 	lda #9
 	sta $71
@@ -17,15 +16,10 @@
 	sta $01
 	sta $d01a
 
-	;lda #%01111111
 	sta $dc0d
-	;sta $dd0d
 
 	lda #%00011011
 	sta $d011
-
-	;lda #%11001000
-	;sta $d016
 
 	lda #$00
 	sta $d012
@@ -37,29 +31,16 @@
 
 	cli
 
-; init sound
-	sta $d404   ; voice 1 control
-	;sta $d40b   ; voice 2 control
+	sta $d404
 
 	lda #15
 	sta $d418
 
-	;lda #55
-	;sta $d401
-
 	lda #(7<<4)|9
 	sta $d406
-	;lda #(3<<4)|3
-	;sta $d40d
-
-	;lda #15
-	;sta $d405
-	;sta $d40c
 
 	lda #17
 	sta $d404
-	;lda #17
-	;sta $d40b
 
 	jmp *
 
@@ -80,7 +61,6 @@ irq:
 
 	rti
 
-; assumes y is $65
 resettext:
 	lda $70
 	cpy #64
@@ -119,9 +99,6 @@ noflash:
 	sta $d401
 
 	lda $d012
-	;and #55
-	;clc
-	;adc #19
 	sta $d408
 
 	rti
@@ -139,4 +116,3 @@ pulsecolors:
 	!scr "                                "
 	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
 	!scr "                                "
-
