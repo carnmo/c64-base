@@ -1,10 +1,25 @@
-	*= $0801
+	; TWO TO THE POWER OF NINE
+	;
+	; A Randy/Origo coop 2025-01
+	;
+	;  DEMOSCENE FOREVER!
+	!cpu 6502
+	!to "2pow9.prg",cbm
 
+	* = $0801
+	!word entry-2
+	!byte $00,$00,$9e
+	!text "2066"
+	!byte $00,$00,$00
+
+	*= $0812
+entry:
 	lda #0
 	sta $64
 	sta $65
 	dec $65
 	sta $70
+	sta $d020
 	sta $d021
 	lda #$09
 	sta $71
@@ -26,26 +41,24 @@
 	lda #%00011011
 	sta $d011
 
-	;lda #%11001000
-	;sta $d016
-
 	lda #$00
 	sta $d012
 
-	ldx #<irq 
+	ldx #<irq
 	stx $fffe
 	ldx #>irq
 	stx $ffff
-	
-	cli
 
+	cli
 
 ; init sound
 	sta $d404   ; voice 1 control
 	sta $d40b   ; voice 2 control
 
-	lda #15
-	sta $d418
+	ldx #15
+	stx $d418
+	stx $d405
+	stx $d40c
 
 	lda #5
 	sta $d401
@@ -55,13 +68,8 @@
 	lda #(3<<4)|3
 	sta $d40d
 
-	lda #15
-	sta $d405
-	sta $d40c
-
 	lda #17
 	sta $d404
-	lda #17
 	sta $d40b
 
 	jmp *
@@ -102,12 +110,7 @@ resettext:
 
 
 pulse:
-	lsr
-	lsr
-	lsr
-	lsr
-	lsr
-	and #1
+	and #%00100000
 	bne noflash
 
 	cpy #42
@@ -115,35 +118,32 @@ pulse:
 	lda pulsecolors,y
 	sta $d020
 	sta $d021
-	lsr
+	;lsr
 	sta $d016
 
 noflash:
-    clc
-    adc #5
-    and #15
+	clc
+	adc #5
+	and #31
 	sta $d401
 
-	lda $d012
-	and #15
+	tya
 	clc
 	adc #19
 	sta $d408
 
 	rti
 
-
 pulsecolors:
 	!fill 32,0
-	!byte $01,$01,$0f,$0f,$0c,$0c,$0b,$0b,$00,$00
+	!byte $01,$01,$0f,$0f,$0c,$0c,$0b,$0b,$0b,$00
 
 	!align 255,0,0
-	!scr "first line of text first line of"
+	!scr "  insane c64 division presents  "
 	!scr "                                "
-	!scr "second line of text first line o"
+	!scr "    two to the power of nine    "
 	!scr "                                "
-	!scr "third line of text first line of"
+	!scr "      demoscene forever !!      "
 	!scr "                                "
-	!scr "fourthline of text first line of"
-	!scr "                                "
-	;!byte $0
+	!scr " greetings to all great friends "
+	!scr "                               "

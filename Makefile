@@ -3,11 +3,11 @@ UNAME_S := $(shell uname -s)
 
 # IF Darwin
 ifeq ($(UNAME_S),Darwin)
-COMPILER=acme --format cbm -v3
-CRUNCHER=./bin/exomizer sfx 0x801 -x3 -C
+COMPILER=acme --format cbm -v9 --initmem 0 -r report.txt
+CRUNCHER=./bin/exomizer sfx 0x801 -n -C
 else
-COMPILER=bin/acme --format cbm -v3 --initmem 1 -r out.txt
-CRUNCHER=bin/exomizer sfx 0x801 -x3 -C
+COMPILER=bin/acme --format cbm -v3 --initmem 0 -r report.txt
+CRUNCHER=bin/exomizer sfx 0x801 -n -C
 endif
 DISKTOOL=c1541
 EMULATOR=x64sc -silent -seed 42 +confirmonexit
@@ -16,7 +16,7 @@ TARGET=c64-base
 TARGET_PRG=$(TARGET).prg
 TARGET_DISK=$(TARGET).d64
 
-all: compile crunch disk run
+all: compile disk run
 
 compile:
 	$(COMPILER) -o $(TARGET_PRG) $(SOURCES)
