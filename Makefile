@@ -6,7 +6,7 @@ ifeq ($(UNAME_S),Darwin)
 COMPILER=acme --format cbm -v3
 CRUNCHER=./bin/exomizer sfx 0x801 -x3 -C
 else
-COMPILER=bin/acme --format cbm -v3 --initmem 1 -r out.txt
+COMPILER=bin/acme --format cbm -v3 --initmem 1
 CRUNCHER=bin/exomizer sfx 0x801 -x3 -C
 endif
 DISKTOOL=c1541
