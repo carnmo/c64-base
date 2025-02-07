@@ -1,6 +1,6 @@
 	*= $0801
 
-	lda #0
+	;lda #0
 	sta $64
 	sta $65
 	dec $65
@@ -8,7 +8,7 @@
 	lda #9
 	sta $71
 
-	jsr $e544
+	;jsr $e544
 
 	sei
 
@@ -55,9 +55,7 @@ irq:
 	sta $0400+40*12+4,y
 
 	lda #$01
-	sta $d800+40*12+4,y
 	sta $d012
-
 	rti
 
 resettext:
@@ -80,26 +78,27 @@ pulse:
 	lsr
 	lsr
 	lsr
+	sta $d021
 	lsr
 	and #1
 	bne noflash
-
 	cpy #42
 	bpl noflash
+	
 	lda pulsecolors,y
 	sta $d020
 	sta $d021
-	lsr
-	sta $d016
-noflash:
-    clc
-    adc #5
-    and #15
-	sta $d401
 
+	lsr
+	sta $d011
+noflash:
+	inc $d011
+	clc
+    adc #5
+	and #15
+	sta $d401
 	lda $d012
 	sta $d408
-
 	rti
 
 pulsecolors:
@@ -107,11 +106,11 @@ pulsecolors:
 	!byte $01,$01,$0f,$0f,$0c,$0c,$0b,$0b,$00,$00
 
 	!align 255,0,0
-	!scr "[f34rl355/h0p31355/f4ll1ng d0wn]"
-	!scr "                                "
-	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
 	!scr "                                "
 	!scr "[f34rl355/h0p31355/f4ll1ng d0wn]"
 	!scr "                                "
 	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
 	!scr "                                "
+	!scr "[f34rl355/h0p31355/f4ll1ng d0wn]"
+	!scr "                                "
+	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
