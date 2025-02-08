@@ -15,7 +15,7 @@ TARGET=c64-base
 TARGET_PRG=$(TARGET).prg
 TARGET_DISK=$(TARGET).d64
 
-all: compile crunch disk run
+all: compile crunch run
 
 compile:
 	$(COMPILER) -o $(TARGET_PRG) $(SOURCES)
