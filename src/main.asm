@@ -1,11 +1,6 @@
 	*= $0801
 
 	jsr $e544
-	;lda #0
-	;sta $64
-	;sta $65
-	;dec $65
-	;sta $d021
 	lda #9
 	sta $71
 
@@ -15,9 +10,6 @@
 	sta $01
 	sta $d01a
 	sta $dc0d
-
-	;lda #%00011011
-	;sta $d011
 
 	ldx #<irq 
 	stx $fffe
@@ -49,8 +41,6 @@ irq:
 	lda ($70),y
 	sta $0400+40*12+4,y
 
-	lda #$01
-	sta $d012
 	rti
 
 resettext:
@@ -64,9 +54,7 @@ resettext:
 	sta $70
 
 	lda #0
-	sta $64
 	sta $65
-	dec $65
 
 pulse:
 	lsr
@@ -75,7 +63,7 @@ pulse:
 	lsr
 	sta $d021
 	lsr
-	and #1
+	and #2
 	bne noflash
 	cpy #42
 	bpl noflash
@@ -87,7 +75,6 @@ pulse:
 	lsr
 	sta $d016
 noflash:
-	;inc $d011
 	clc
     adc #5
 	and #15
@@ -103,9 +90,9 @@ pulsecolors:
 	!align 255,0,0
 	!scr "[f34rl355/num6 )) [f4ll1ng d0wn]"
 	!scr "                                "
-	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
+	!scr " 3ndl355*d3p7h5+0f.my>d4rk-46y55"
 	!scr "                                "
 	!scr "[f34rl355/num6 )) [f4ll1ng d0wn]"
 	!scr "                                "
-	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
+	!scr " 3ndl355*d3p7h5+0f.my>d4rk-46y55"
 	!scr "                                "
