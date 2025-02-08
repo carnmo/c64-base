@@ -8,8 +8,6 @@
 	lda #9
 	sta $71
 
-	;jsr $e544
-
 	sei
 
 	lda #%00110101
@@ -20,9 +18,6 @@
 
 	lda #%00011011
 	sta $d011
-
-	lda #$00
-	sta $d012
 
 	ldx #<irq 
 	stx $fffe
