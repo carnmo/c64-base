@@ -1,10 +1,11 @@
 	*= $0801
 
+	jsr $e544
 	;lda #0
-	sta $64
-	sta $65
-	dec $65
-	sta $d021
+	;sta $64
+	;sta $65
+	;dec $65
+	;sta $d021
 	lda #9
 	sta $71
 
@@ -13,11 +14,10 @@
 	lda #%00110101
 	sta $01
 	sta $d01a
-
 	sta $dc0d
 
-	lda #%00011011
-	sta $d011
+	;lda #%00011011
+	;sta $d011
 
 	ldx #<irq 
 	stx $fffe
@@ -85,9 +85,9 @@ pulse:
 	sta $d021
 
 	lsr
-	sta $d011
+	sta $d016
 noflash:
-	inc $d011
+	;inc $d011
 	clc
     adc #5
 	and #15
@@ -101,11 +101,11 @@ pulsecolors:
 	!byte $01,$01,$0f,$0f,$0c,$0c,$0b,$0b,$00,$00
 
 	!align 255,0,0
+	!scr "[f34rl355/num6 )) [f4ll1ng d0wn]"
 	!scr "                                "
-	!scr "[f34rl355/h0p31355/f4ll1ng d0wn]"
+	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
+	!scr "                                "
+	!scr "[f34rl355/num6 )) [f4ll1ng d0wn]"
 	!scr "                                "
 	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
 	!scr "                                "
-	!scr "[f34rl355/h0p31355/f4ll1ng d0wn]"
-	!scr "                                "
-	!scr "3ndl355*d3p7h5+0f.th3>d4rk-46y55"
