@@ -1,5 +1,7 @@
 	*= $0801
 
+	lda $d018
+	sta $64
 	jsr $e544
 	lda #9
 	sta $71
@@ -37,6 +39,9 @@ irq:
 	ldy $65
 	cpy #32
 	bpl resettext
+	
+	lda $64
+	sta $d018
 
 	lda ($70),y
 	sta $0400+40*12+4,y
@@ -49,13 +54,11 @@ resettext:
 	bmi pulse
 
 	clc
-
 	adc #32
 	sta $70
 
 	lda #0
 	sta $65
-
 pulse:
 	lsr
 	lsr
@@ -67,13 +70,13 @@ pulse:
 	bne noflash
 	cpy #42
 	bpl noflash
-	
+
 	lda pulsecolors,y
 	sta $d020
 	sta $d021
-
 	lsr
 	sta $d016
+	sta $d018
 noflash:
 	clc
     adc #5
